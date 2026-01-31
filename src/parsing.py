@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver as wd
 
+from read import rename_files
+
 
 def parse_url(url_list=[]):
     browser = wd.Firefox()
@@ -21,3 +23,4 @@ def download_files(url_list):
         response = requests.get(url)
         with open(f"{url.split('/')[-1]}", "wb") as file:
             file.write(response.content)
+            rename_files()

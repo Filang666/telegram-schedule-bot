@@ -3,6 +3,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 
 from keyboards.keyboard import days_kb, main_kb
+from read import parse_schedule_text
 
 classlist = [
     "11А",
@@ -39,8 +40,7 @@ def choose_class():
 def send_schedule(days, number):
     @start_router.message(F.text == f"{days} {number}")
     async def send_schedule(message: Message):
-        await message.answer(f"Расписание на {days} {number}")
-        # await message.answer()
+        await message.answer(parse_schedule_text(number, days))
 
 
 @start_router.message(CommandStart())
